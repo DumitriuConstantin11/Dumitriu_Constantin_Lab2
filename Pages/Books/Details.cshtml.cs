@@ -29,24 +29,34 @@ namespace Dumitriu_Constantin_Lab2.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            // Încarcă datele cărții împreună cu autorul, editorul și categoriile
+            Book = await _context.Book
+                .Include(b => b.Author)
+                .Include(b => b.Publisher)
+                .Include(b => b.BookCategories)
+                    .ThenInclude(bc => bc.Category)  // Include categoriile cărții
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Book == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Book = book;
-            }
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+
             var authors = _context.Set<Author>()
                 .Select(a => new
                 {
                     a.ID,
                     FullName = a.FirstName + " " + a.LastName
                 }).ToList();
-            ViewData["AuthorID"] = new SelectList(authors, "ID", "FullName");
+            //ViewData["AuthorID"] = new SelectList(authors, "ID", "FullName");
             return Page();
+
+            //var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+
+
+            
+            /*return Page();
+            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");*/
         }
     }
 }
