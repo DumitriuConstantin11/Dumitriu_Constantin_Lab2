@@ -29,12 +29,11 @@ namespace Dumitriu_Constantin_Lab2.Pages.Books
                 return NotFound();
             }
 
-            // Încarcă datele cărții împreună cu autorul, editorul și categoriile
             Book = await _context.Book
                 .Include(b => b.Author)
                 .Include(b => b.Publisher)
                 .Include(b => b.BookCategories)
-                    .ThenInclude(bc => bc.Category)  // Include categoriile cărții
+                    .ThenInclude(bc => bc.Category)  
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Book == null)
