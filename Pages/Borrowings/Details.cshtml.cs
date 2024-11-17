@@ -39,7 +39,6 @@ namespace Dumitriu_Constantin_Lab2.Pages.Borrowings
 
             Borrowing = borrowing;
 
-            // Încarcă detaliile cărții asociate împrumutului
             Book = await _context.Book
                 .Include(b => b.Author)
                 .Include(b => b.Publisher)
@@ -52,7 +51,6 @@ namespace Dumitriu_Constantin_Lab2.Pages.Borrowings
                 return NotFound();
             }
 
-            // Încarcă membrul asociat împrumutului
             Member = await _context.Member
                 .FirstOrDefaultAsync(m => m.ID == Borrowing.MemberID);
 

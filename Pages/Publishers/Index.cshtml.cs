@@ -11,6 +11,7 @@ using Dumitriu_Constantin_Lab2.Models.ViewModels;
 
 namespace Dumitriu_Constantin_Lab2.Pages.Publishers
 {
+  
     public class IndexModel : PageModel
     {
         private readonly Dumitriu_Constantin_Lab2.Data.Dumitriu_Constantin_Lab2Context _context;

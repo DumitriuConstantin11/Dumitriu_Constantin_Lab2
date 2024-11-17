@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Dumitriu_Constantin_Lab2.Data;
 using Dumitriu_Constantin_Lab2.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dumitriu_Constantin_Lab2.Pages.Books
 {
+    [Authorize(Roles ="Admin")]
     public class DeleteModel : PageModel
     {
         private readonly Dumitriu_Constantin_Lab2.Data.Dumitriu_Constantin_Lab2Context _context;
